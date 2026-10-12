@@ -1,0 +1,140 @@
+== start Mon Oct 12 05:47:05 PM EDT 2026
+[minicpm47-2x3090-tp2-nvl] warm-up ...
+  c1: agg  172.2 tok/s | per-stream 172.2 | w2w med  1.86s p90  1.86s | TTFT  0.22s | prefill 7584 tok/s
+  c2: agg  287.5 tok/s | per-stream 144.1 | w2w med  2.22s p90  2.23s | TTFT  0.12s
+  c3: agg  423.2 tok/s | per-stream 141.2 | w2w med  2.27s p90  2.27s | TTFT  0.16s
+  c4: agg  556.5 tok/s | per-stream 139.2 | w2w med  2.30s p90  2.30s | TTFT  0.20s
+  c5: agg  677.4 tok/s | per-stream 135.6 | w2w med  2.36s p90  2.36s | TTFT  0.23s
+  c6: agg  802.6 tok/s | per-stream 133.8 | w2w med  2.39s p90  2.39s | TTFT  0.27s
+JSON -> results/sweep_minicpm47-2x3090-tp2-nvl.json
+  [minicpm47-2x3090-tp2-nvl]    7056 tok  run 1:   10851 tok/s  (   0.7s)
+  [minicpm47-2x3090-tp2-nvl]    7056 tok  run 2:   68865 tok/s  (   0.1s)
+  [minicpm47-2x3090-tp2-nvl]    7056 tok  run 3:   68934 tok/s  (   0.1s)
+  [minicpm47-2x3090-tp2-nvl]   14087 tok  run 1:   17897 tok/s  (   0.8s)
+  [minicpm47-2x3090-tp2-nvl]   14087 tok  run 2:  136277 tok/s  (   0.1s)
+  [minicpm47-2x3090-tp2-nvl]   14087 tok  run 3:  138419 tok/s  (   0.1s)
+  [minicpm47-2x3090-tp2-nvl]   28149 tok  run 1:   15266 tok/s  (   1.8s)
+  [minicpm47-2x3090-tp2-nvl]   28149 tok  run 2:  208605 tok/s  (   0.1s)
+  [minicpm47-2x3090-tp2-nvl]   28149 tok  run 3:  217198 tok/s  (   0.1s)
+  [minicpm47-2x3090-tp2-nvl]   56362 tok  run 1:   11593 tok/s  (   4.9s)
+  [minicpm47-2x3090-tp2-nvl]   56362 tok  run 2:  270424 tok/s  (   0.2s)
+  [minicpm47-2x3090-tp2-nvl]   56362 tok  run 3:  277376 tok/s  (   0.2s)
+  [minicpm47-2x3090-tp2-nvl]  112788 tok  run 1:    7784 tok/s  (  14.5s)
+  [minicpm47-2x3090-tp2-nvl]  112788 tok  run 2:  316162 tok/s  (   0.4s)
+  [minicpm47-2x3090-tp2-nvl]  112788 tok  run 3:  316933 tok/s  (   0.4s)
+  [minicpm47-2x3090-tp2-nvl]  220300 tok  run 1:    4908 tok/s  (  44.9s)
+  [minicpm47-2x3090-tp2-nvl]  220300 tok  run 2:  286608 tok/s  (   0.8s)
+  [minicpm47-2x3090-tp2-nvl]  220300 tok  run 3:  288687 tok/s  (   0.8s)
+[minicpm47-2x3090-tp2-nvl] prefill vs length -> results/prefill_len_minicpm47-2x3090-tp2-nvl.json
+       7056 tok: cold 10851 tok/s (0.7s)  warm 68900 tok/s (0.1s)
+      14087 tok: cold 17897 tok/s (0.8s)  warm 137348 tok/s (0.1s)
+      28149 tok: cold 15266 tok/s (1.8s)  warm 212901 tok/s (0.1s)
+      56362 tok: cold 11593 tok/s (4.9s)  warm 273900 tok/s (0.2s)
+     112788 tok: cold 7784 tok/s (14.5s)  warm 316547 tok/s (0.4s)
+     220300 tok: cold 4908 tok/s (44.9s)  warm 287647 tok/s (0.8s)
+  [minicpm47-2x3090-tp2-nvl/off/c1] code1    coding     score=1.00  ttft  0.06s  decode 173.9 tok/s   156 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] code2    coding     score=1.00  ttft  0.04s  decode 173.7 tok/s   247 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] code3    coding     score=1.00  ttft  0.04s  decode 173.7 tok/s    99 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] code4    coding     score=1.00  ttft  0.04s  decode 173.7 tok/s    88 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] code5    coding     score=1.00  ttft  0.04s  decode 173.6 tok/s   191 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] reason1  reasoning  score=1.00  ttft  0.04s  decode 173.6 tok/s   336 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] reason2  reasoning  score=1.00  ttft  0.04s  decode 173.6 tok/s   398 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] reason3  reasoning  score=1.00  ttft  0.04s  decode 173.5 tok/s   373 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] reason4  reasoning  score=1.00  ttft  0.04s  decode 173.4 tok/s   387 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] reason5  reasoning  score=1.00  ttft  0.04s  decode 173.5 tok/s   371 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] json1    json       score=1.00  ttft  0.04s  decode 173.3 tok/s    65 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] json2    json       score=1.00  ttft  0.04s  decode 173.7 tok/s    49 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] json3    json       score=1.00  ttft  0.04s  decode 174.4 tok/s    21 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] json4    json       score=1.00  ttft  0.04s  decode 173.9 tok/s    26 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] json5    json       score=1.00  ttft  0.04s  decode 173.4 tok/s    51 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] html1    html       score=1.00  ttft  0.04s  decode 173.5 tok/s   151 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] html2    html       score=1.00  ttft  0.04s  decode 173.3 tok/s   158 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] html3    html       score=1.00  ttft  0.04s  decode 173.5 tok/s    88 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] html4    html       score=1.00  ttft  0.04s  decode 173.6 tok/s   101 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] html5    html       score=1.00  ttft  0.04s  decode 173.4 tok/s   426 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] prose1   prose      score=1.00  ttft  0.04s  decode 173.5 tok/s   186 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] prose2   prose      score=1.00  ttft  0.04s  decode 173.7 tok/s   109 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] prose3   prose      score=1.00  ttft  0.04s  decode 173.6 tok/s   122 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] prose4   prose      score=1.00  ttft  0.04s  decode 173.3 tok/s   211 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] prose5   prose      score=1.00  ttft  0.04s  decode 173.6 tok/s   145 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] story1   narrative  score=1.00  ttft  0.04s  decode 173.5 tok/s   302 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] story2   narrative  score=1.00  ttft  0.04s  decode 173.4 tok/s   193 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] story3   narrative  score=1.00  ttft  0.04s  decode 173.4 tok/s   298 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] story4   narrative  score=1.00  ttft  0.04s  decode 173.5 tok/s   163 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] story5   narrative  score=1.00  ttft  0.04s  decode 173.5 tok/s   259 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] sum1     summary    score=1.00  ttft  0.04s  decode 174.3 tok/s    36 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] sum2     summary    score=0.50  ttft  0.04s  decode 173.9 tok/s    20 tok  stop  fails: words 16 in 20-80
+  [minicpm47-2x3090-tp2-nvl/off/c1] sum3     summary    score=1.00  ttft  0.24s  decode 171.5 tok/s    54 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] sum4     summary    score=1.00  ttft  0.04s  decode 174.2 tok/s    58 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] sum5     summary    score=0.00  ttft  0.13s  decode 173.0 tok/s   184 tok  stop  fails: chars 443<=280
+  [minicpm47-2x3090-tp2-nvl/off/c1] fmt1     format     score=1.00  ttft  0.04s  decode 174.1 tok/s    21 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] fmt2     format     score=1.00  ttft  0.04s  decode 173.4 tok/s    69 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] fmt3     format     score=1.00  ttft  0.04s  decode 173.8 tok/s    10 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] fmt4     format     score=1.00  ttft  0.04s  decode 174.6 tok/s    15 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c1] fmt5     format     score=1.00  ttft  0.04s  decode 174.1 tok/s    20 tok  stop
+[minicpm47-2x3090-tp2-nvl/off/c1] done: auto 0.963, ttft med 0.04s, decode med 173.6 tok/s -> results/categories_minicpm47-2x3090-tp2-nvl_off_c1.json
+    coding     auto=1.0  ttft=0.04s  decode=173.7  tokens=156
+    reasoning  auto=1.0  ttft=0.04s  decode=173.5  tokens=373
+    json       auto=1.0  ttft=0.04s  decode=173.7  tokens=49
+    html       auto=1.0  ttft=0.04s  decode=173.5  tokens=151
+    prose      auto=1.0  ttft=0.04s  decode=173.6  tokens=145
+    narrative  auto=1.0  ttft=0.04s  decode=173.5  tokens=259
+    summary    auto=0.7  ttft=0.04s  decode=173.9  tokens=54
+    format     auto=1.0  ttft=0.04s  decode=174.1  tokens=20
+  [minicpm47-2x3090-tp2-nvl/off/c6] json1    json       score=1.00  ttft  0.21s  decode 117.4 tok/s    65 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] html1    html       score=1.00  ttft  0.16s  decode 116.3 tok/s   150 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] code1    coding     score=1.00  ttft  0.21s  decode 119.4 tok/s   156 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] prose1   prose      score=1.00  ttft  0.21s  decode 121.8 tok/s   185 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] story1   narrative  score=1.00  ttft  0.21s  decode 129.4 tok/s   287 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] reason1  reasoning  score=1.00  ttft  0.21s  decode 134.4 tok/s   335 tok  stop
+    batch 1: agg 437.0 tok/s, wall 2.7s
+  [minicpm47-2x3090-tp2-nvl/off/c6] fmt1     format     score=1.00  ttft  0.09s  decode 116.9 tok/s    21 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] sum1     summary    score=1.00  ttft  0.05s  decode 108.5 tok/s    36 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] json2    json       score=1.00  ttft  0.09s  decode 121.8 tok/s    49 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] html2    html       score=1.00  ttft  0.09s  decode 132.3 tok/s   158 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] code2    coding     score=1.00  ttft  0.09s  decode 137.1 tok/s   249 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] reason2  reasoning  score=1.00  ttft  0.09s  decode 148.3 tok/s   390 tok  stop
+    batch 2: agg 332.4 tok/s, wall 2.7s
+  [minicpm47-2x3090-tp2-nvl/off/c6] sum2     summary    score=0.50  ttft  0.09s  decode 116.6 tok/s    20 tok  stop  fails: words 16 in 20-80
+  [minicpm47-2x3090-tp2-nvl/off/c6] fmt2     format     score=1.00  ttft  0.09s  decode 120.1 tok/s    69 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] prose2   prose      score=1.00  ttft  0.04s  decode 120.3 tok/s   117 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] code3    coding     score=1.00  ttft  0.09s  decode 123.9 tok/s   117 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] story2   narrative  score=1.00  ttft  0.09s  decode 129.3 tok/s   161 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] reason3  reasoning  score=1.00  ttft  0.09s  decode 150.6 tok/s   362 tok  stop
+    batch 3: agg 340.5 tok/s, wall 2.5s
+  [minicpm47-2x3090-tp2-nvl/off/c6] fmt3     format     score=1.00  ttft  0.10s  decode 114.0 tok/s    10 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] json3    json       score=1.00  ttft  0.05s  decode  94.4 tok/s    21 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] sum3     summary    score=1.00  ttft  0.10s  decode 125.1 tok/s    54 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] html3    html       score=1.00  ttft  0.10s  decode 129.6 tok/s    88 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] prose3   prose      score=1.00  ttft  0.10s  decode 133.8 tok/s   122 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] story3   narrative  score=1.00  ttft  0.10s  decode 156.9 tok/s   343 tok  stop
+    batch 4: agg 279.4 tok/s, wall 2.3s
+  [minicpm47-2x3090-tp2-nvl/off/c6] json4    json       score=1.00  ttft  0.09s  decode 115.1 tok/s    26 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] code4    coding     score=1.00  ttft  0.04s  decode 114.9 tok/s    88 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] html4    html       score=1.00  ttft  0.09s  decode 120.8 tok/s   101 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] story4   narrative  score=1.00  ttft  0.09s  decode 126.6 tok/s   162 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] prose4   prose      score=0.00  ttft  0.09s  decode 127.7 tok/s   174 tok  stop  fails: words 144 in 150-200
+  [minicpm47-2x3090-tp2-nvl/off/c6] reason4  reasoning  score=1.00  ttft  0.09s  decode 149.7 tok/s   392 tok  stop
+    batch 5: agg 348.7 tok/s, wall 2.7s
+  [minicpm47-2x3090-tp2-nvl/off/c6] fmt4     format     score=1.00  ttft  0.09s  decode 116.9 tok/s    15 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] json5    json       score=1.00  ttft  0.09s  decode 120.7 tok/s    51 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] sum4     summary    score=1.00  ttft  0.05s  decode 116.1 tok/s    64 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] code5    coding     score=1.00  ttft  0.09s  decode 132.1 tok/s   191 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] reason5  reasoning  score=1.00  ttft  0.09s  decode 138.7 tok/s   371 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] html5    html       score=1.00  ttft  0.09s  decode 140.7 tok/s   401 tok  stop
+    batch 6: agg 372.6 tok/s, wall 2.9s
+  [minicpm47-2x3090-tp2-nvl/off/c6] fmt5     format     score=1.00  ttft  0.09s  decode 133.8 tok/s    20 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] prose5   prose      score=1.00  ttft  0.09s  decode 137.2 tok/s   146 tok  stop
+  [minicpm47-2x3090-tp2-nvl/off/c6] sum5     summary    score=0.00  ttft  0.09s  decode 139.0 tok/s   184 tok  stop  fails: chars 443<=280
+  [minicpm47-2x3090-tp2-nvl/off/c6] story5   narrative  score=1.00  ttft  0.05s  decode 145.0 tok/s   262 tok  stop
+    batch 7: agg 331.6 tok/s, wall 1.8s
+[minicpm47-2x3090-tp2-nvl/off/c6] done: auto 0.938, ttft med 0.09s, decode med 125.8 tok/s, mixed agg med 340.5 tok/s -> results/categories_minicpm47-2x3090-tp2-nvl_off_c6.json
+    coding     auto=1.0  ttft=0.09s  decode=123.9  tokens=156
+    reasoning  auto=1.0  ttft=0.09s  decode=148.3  tokens=371
+    json       auto=1.0  ttft=0.09s  decode=117.4  tokens=49
+    html       auto=1.0  ttft=0.09s  decode=129.6  tokens=150
+    prose      auto=0.8  ttft=0.09s  decode=127.7  tokens=146
+    narrative  auto=1.0  ttft=0.09s  decode=129.4  tokens=262
+    summary    auto=0.7  ttft=0.09s  decode=116.6  tokens=54
+    format     auto=1.0  ttft=0.09s  decode=116.9  tokens=20
+== done Mon Oct 12 05:49:59 PM EDT 2026

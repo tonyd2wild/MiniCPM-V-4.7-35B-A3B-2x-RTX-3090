@@ -1,0 +1,86 @@
+{
+ "lane": "minicpm47-2x3090-tp2-nvl",
+ "model": "minicpm-v-4.7",
+ "reps": 3,
+ "rows": [
+  {
+   "target": 8000,
+   "prompt_tokens": 7056,
+   "cold_tok_s": 10851,
+   "cold_s": 0.7,
+   "warm_tok_s": 68900,
+   "warm_s": 0.1,
+   "all_tok_s": [
+    10851,
+    68865,
+    68934
+   ]
+  },
+  {
+   "target": 16000,
+   "prompt_tokens": 14087,
+   "cold_tok_s": 17897,
+   "cold_s": 0.8,
+   "warm_tok_s": 137348,
+   "warm_s": 0.1,
+   "all_tok_s": [
+    17897,
+    136277,
+    138419
+   ]
+  },
+  {
+   "target": 32000,
+   "prompt_tokens": 28149,
+   "cold_tok_s": 15266,
+   "cold_s": 1.8,
+   "warm_tok_s": 212901,
+   "warm_s": 0.1,
+   "all_tok_s": [
+    15266,
+    208605,
+    217198
+   ]
+  },
+  {
+   "target": 64000,
+   "prompt_tokens": 56362,
+   "cold_tok_s": 11593,
+   "cold_s": 4.9,
+   "warm_tok_s": 273900,
+   "warm_s": 0.2,
+   "all_tok_s": [
+    11593,
+    270424,
+    277376
+   ]
+  },
+  {
+   "target": 128000,
+   "prompt_tokens": 112788,
+   "cold_tok_s": 7784,
+   "cold_s": 14.5,
+   "warm_tok_s": 316547,
+   "warm_s": 0.4,
+   "all_tok_s": [
+    7784,
+    316162,
+    316933
+   ]
+  },
+  {
+   "target": 250000,
+   "prompt_tokens": 220300,
+   "cold_tok_s": 4908,
+   "cold_s": 44.9,
+   "warm_tok_s": 287647,
+   "warm_s": 0.8,
+   "all_tok_s": [
+    4908,
+    286608,
+    288687
+   ]
+  }
+ ],
+ "ts": "2026-10-12 17:49"
+}

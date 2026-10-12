@@ -1,0 +1,6 @@
+MiniCPM-V-4.7-2x3090-TP2
+Copyright 2026 Tony DeAngelo (Tech2Wild / 2Wild). Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+The model weights are not part of this repository. The recipe serves openbmb/MiniCPM-V-4.7-35B-A3B-int4
+(Apache-2.0, OpenBMB) with vLLM (Apache-2.0, contributors to the vLLM project) from the public
+vllm/vllm-openai nightly image. launch/, tools/ and results/ are original to this repository.
