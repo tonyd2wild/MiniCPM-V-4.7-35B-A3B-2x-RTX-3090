@@ -1,10 +1,11 @@
-# MiniCPM-V 4.7 35B-A3B on 2x RTX 3090: 172 tok/s single stream, 803 tok/s at c6, full 262K context, in vLLM
+# MiniCPM-V 4.7 35B-A3B on 2x RTX 3090: 356 tok/s single stream on real prompts with the DSpark draft (2.05x), full 262K context, in vLLM
 
 OpenBMB's first MoE vision model (`openbmb/MiniCPM-V-4.7-35B-A3B-int4`, 22.6 GB) served on two RTX 3090s (48 GB VRAM) joined by an NVLink bridge, tensor parallel 2, with an OpenAI-compatible API, tool calling and images. Deployed the day after vLLM merged support (2026-10-12). Every number below was measured on the box.
 
 | | Result |
 |---|---|
-| Single stream (c1) | **172.2 tok/s** end to end, 1.86 s for a 300-number list |
+| **With the DSpark draft (default since 2026-10-12, 11 PM)** | Real prompts c1: **356.0 tok/s** median decode vs 173.6 plain (**2.05x**), code 397, JSON/HTML ~600 · c6: **274.2 tok/s** per stream vs 125.8, mixed aggregate 657 vs 340 · see [DSpark](#dspark-speculative-decoding) |
+| Plain (no draft), single stream (c1) | **172.2 tok/s** end to end, 1.86 s for a 300-number list |
 | Concurrency c1 → c6 | **172 / 288 / 423 / 557 / 677 / 803 tok/s** aggregate, 134 tok/s per stream at c6 |
 | TTFT (1.5K-token prompt) | **0.22 s** at c1, 0.27 s at c6 |
 | Prefill, cold (new prompt) | **18K tok/s** at 14K tokens · 11.6K at 56K · 7.8K at 113K · 4.9K tok/s at 220K (44.9 s) |
@@ -23,7 +24,9 @@ HF_HUB_DISABLE_XET=1 hf download openbmb/MiniCPM-V-4.7-35B-A3B-int4 --local-dir 
 python3 launch/fix_configs.py ~/models/MiniCPM-V-4.7-35B-A3B-int4
 # 3. image: pinned vLLM nightly minus a broken torchcodec
 docker build -t local/vllm-minicpm47:fe4df3d launch/
-# 4. serve on GPU 0+1, port 8016
+# 4. optional speculative-decoding draft (0.78 GB), used by default; DSPARK=0 turns it off
+HF_HUB_DISABLE_XET=1 hf download openbmb/MiniCPM-V-4.7-35B-A3B-DSpark --local-dir ~/models/MiniCPM-V-4.7-35B-A3B-DSpark
+# 5. serve on GPU 0+1, port 8016
 GPUS=0,1 PORT=8016 bash launch/serve.sh
 ```
 
@@ -52,7 +55,52 @@ On 2026-10-12, none of these worked out of the box:
    - [`fix_configs.py`](launch/fix_configs.py) strips every `auto_map` and maps the two class names. It keeps `*.json.orig` and can be re-run safely.
    - No `--trust-remote-code` is needed afterwards.
 
-## Results
+## DSpark speculative decoding
+
+OpenBMB ships a matching draft, [`openbmb/MiniCPM-V-4.7-35B-A3B-DSpark`](https://huggingface.co/openbmb/MiniCPM-V-4.7-35B-A3B-DSpark): 5 layers, 389M params, BF16, 0.78 GB. It reads hidden states from target layers 3/11/19/27/35 and proposes a block of tokens that the big model verifies in one pass. The pinned nightly already supports `method: "dspark"`. No extra patches are needed:
+
+```
+--max-num-seqs 16 --speculative-config '{"method":"dspark","model":"/models/MiniCPM-V-4.7-35B-A3B-DSpark","num_speculative_tokens":7}'
+```
+
+### Draft length: 7 beats the model card's 15
+The card's example uses 15 tokens per step. On our int4 target (the draft was trained against the BF16 model), 15 made structured output fly but made free-form writing *slower* than no draft. Most of the 15 guesses get thrown away on prose, and verifying them costs time. 7 keeps most of the structured-output gain and stops the prose loss.
+
+Real prompts, single stream, decode tok/s (median of 5 per type; [plain](results/speed/categories_minicpm47-2x3090-tp2-nvl_off_c1.json), [15](results/speed/categories_minicpm47-2x3090-tp2-nvl-dspark_off_c1.json), [7](results/speed/categories_minicpm47-2x3090-tp2-nvl-dspark7_off_c1.json), [7 at c6](results/speed/categories_minicpm47-2x3090-tp2-nvl-dspark7_off_c6.json)):
+
+| type | plain c1 | draft 15, c1 | **draft 7, c1** | 7 vs plain | plain c6 / stream | draft 7, c6 / stream |
+|---|---|---|---|---|---|---|
+| coding | 173.7 | 222.1 | **396.6** | 2.28x | 123.9 | 312.5 |
+| reasoning | 173.5 | 656.2 | **564.1** | 3.25x | 148.3 | 404.5 |
+| JSON | 173.7 | 832.1 | **614.7** | 3.54x | 117.4 | 371.3 |
+| HTML | 173.5 | 727.5 | **598.6** | 3.45x | 129.6 | 394.5 |
+| prose | 173.6 | 159.3 | **198.7** | 1.14x | 127.7 | 144.9 |
+| narrative | 173.5 | 137.8 | **177.0** | 1.02x | 129.4 | 144.6 |
+| summary | 173.9 | 192.9 | **244.6** | 1.41x | 116.6 | 140.1 |
+| format (≤20-token answers) | 174.1 | 128.7 | **168.9** | 0.97x | 116.9 | 87.1 |
+| **median, all 40** | **173.6** | **247.9** | **356.0** | **2.05x** | **125.8** | **274.2** |
+
+The c6 mixed aggregate went from 340 to **657 tok/s**. Auto-grade was 96.3% plain and 93.2% with the draft (7). The extra misses were one prose answer at 141 words against a 150-200 range and one story with a single line of dialogue. That is the same output-length style of miss as the plain run's. Speculative decoding verifies every token against the big model, so the answers are the big model's own. The small differences come from batch-shape numerics.
+
+### Concurrency sweep with the draft (best case) ([json](results/speed/sweep_minicpm47-2x3090-tp2-nvl-dspark7.json))
+This is the same load as the plain sweep, "list the numbers 1 to 300". That task is almost perfectly predictable, so this is the draft's **best case**, not typical speed. Use the real-prompt table above for typical speed.
+
+| c | plain aggregate | **draft 7 aggregate** | per stream | wall median | TTFT |
+|---|---|---|---|---|---|
+| 1 | 172.2 | **654.9** | 655.2 | 0.49 s | 0.20 s |
+| 2 | 287.5 | **1,223.8** | 612.4 | 0.52 s | 0.22 s |
+| 3 | 423.2 | **1,689.7** | 563.9 | 0.57 s | 0.34 s |
+| 4 | 556.5 | **2,132.9** | 534.0 | 0.60 s | 0.42 s |
+| 5 | 677.4 | **2,276.6** | 472.8 | 0.68 s | 0.52 s |
+| 6 | 802.6 | **2,584.9** | 432.7 | 0.74 s | 0.59 s |
+
+### What the draft costs
+- **KV pool:** 612,385 → 361,656 tokens. The draft's 5 full-attention layers add a lot per token next to a hybrid target that has only 10 full-attention layers, and its CUDA graphs take memory too. A full 262K request still fits (1.38x). vLLM also logs that no KV group was identified as the draft's.
+- **Cold prefill** ([json](results/speed/prefill_len_minicpm47-2x3090-tp2-nvl-dspark7.json)): 10.4K tok/s at 14K tokens (plain 17.9K) · 8.8K at 56K (11.6K) · 8.3K at 113K (7.8K) · 5.2K at 220K (4.9K). Short prompts pay the draft's own prefill. Long prompts are a wash.
+- **Images:** vLLM warns that the draft does not take the target's multimodal embeddings, so on image prompts it drafts from text only. Acceptance on vision prompts will be lower than the card's MMMU/OCRBench numbers. We have not measured it yet.
+- **Rollback:** `DSPARK=0 bash launch/serve.sh`.
+
+## Results (plain, no draft)
 
 ### Concurrency sweep c1-c6 ([json](results/speed/sweep_minicpm47-2x3090-tp2-nvl.json))
 Non-stream, temperature 0, thinking off, 3 rounds per level. Load prompt: "list the numbers 1 to 300". TTFT is c concurrent ~1.5K-token prompts with an 8-token answer.
@@ -116,4 +164,5 @@ The misses were all length limits. A tweet came out at 443 characters against a 
 
 - Model: [OpenBMB MiniCPM-V 4.7](https://huggingface.co/openbmb/MiniCPM-V-4.7-35B-A3B-int4), Apache-2.0.
 - Engine: [vLLM](https://github.com/vllm-project/vllm); MiniCPM-V 4.7 support from PR #58674.
+- Draft: [OpenBMB MiniCPM-V-4.7-35B-A3B-DSpark](https://huggingface.co/openbmb/MiniCPM-V-4.7-35B-A3B-DSpark), Apache-2.0; method from [arXiv 2607.05147](https://arxiv.org/abs/2607.05147).
 - Recipe, fixes, tools and measurements: Tony DeAngelo (Tech2Wild / 2Wild), 2026-10-12.

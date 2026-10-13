@@ -1,0 +1,56 @@
+{
+ "lane": "minicpm47-2x3090-tp2-nvl-dspark7",
+ "model": "minicpm-v-4.7",
+ "reps": 2,
+ "rows": [
+  {
+   "target": 16000,
+   "prompt_tokens": 14087,
+   "cold_tok_s": 10425,
+   "cold_s": 1.4,
+   "warm_tok_s": 75996,
+   "warm_s": 0.2,
+   "all_tok_s": [
+    10425,
+    75996
+   ]
+  },
+  {
+   "target": 64000,
+   "prompt_tokens": 56362,
+   "cold_tok_s": 8838,
+   "cold_s": 6.4,
+   "warm_tok_s": 162493,
+   "warm_s": 0.3,
+   "all_tok_s": [
+    8838,
+    162493
+   ]
+  },
+  {
+   "target": 128000,
+   "prompt_tokens": 112788,
+   "cold_tok_s": 8304,
+   "cold_s": 13.6,
+   "warm_tok_s": 175172,
+   "warm_s": 0.6,
+   "all_tok_s": [
+    8304,
+    175172
+   ]
+  },
+  {
+   "target": 250000,
+   "prompt_tokens": 220300,
+   "cold_tok_s": 5165,
+   "cold_s": 42.6,
+   "warm_tok_s": 187037,
+   "warm_s": 1.2,
+   "all_tok_s": [
+    5165,
+    187037
+   ]
+  }
+ ],
+ "ts": "2026-10-12 23:25"
+}
